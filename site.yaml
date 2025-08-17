@@ -1,0 +1,14 @@
+- name: Get public IP
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Call public IP API
+      uri:
+        url: https://api.ipify.org?format=json
+        method: GET
+        return_content: yes
+      register: public_ip
+
+    - name: Show public IP
+      debug:
+        msg: "My public IP is {{ public_ip.json.ip }}"
